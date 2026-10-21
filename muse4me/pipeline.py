@@ -33,7 +33,9 @@ def run_entry(cfg: Config, entry: dict, corpus: list, clients=None, log=print):
 
     log(f"[retrieve] mode={cfg.inspiration_mode} corpus={len(corpus)}")
     inspirations = retrieve_inspirations(c_ret, cfg, rq, bg, corpus)
-    log(f"[retrieve] kept {len(inspirations)} inspirations")
+    if cfg.max_inspirations and len(inspirations) > cfg.max_inspirations:
+        inspirations = inspirations[:cfg.max_inspirations]
+    log(f"[retrieve] kept {len(inspirations)} inspirations (capped at {cfg.max_inspirations})")
 
     candidates = evolve(c_gen, cfg, rq, bg, inspirations, log=log)
     log(f"[evolve] produced {len(candidates)} candidate hypotheses")

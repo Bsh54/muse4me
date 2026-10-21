@@ -21,6 +21,7 @@ class Config:
     retrieve_window: int = 12
     retrieve_keep: int = 3
     retrieve_rounds: int = 2
+    max_inspirations: int = 4           # hard cap on inspirations evolved per entry (bounds cost/time)
     inspiration_mode: str = "far"       # "far" (potential) or "near" (similarity) or "none"
     extra: dict = field(default_factory=dict)
 
