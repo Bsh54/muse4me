@@ -85,20 +85,31 @@ def _(benchmark, corpus, entry_dd, mode_dd, run_btn, cfg_path, have_config, mo):
 def _(entry, result, mo):
     top = result["hypotheses"][0]
     header = mo.md(f"## Problem\n{entry['research_question']}")
-    insp = mo.md("**Inspirations used:** " + (", ".join(result["inspirations"]) or "(none)"))
+    insp = mo.md("**Distant inspirations used:** " + (", ".join(result["inspirations"]) or "(none)"))
     best = mo.md(
         f"## muse4me's best hypothesis\n{top['text']}\n\n"
         f"*self-score {top['avg_score']:.2f}/5*"
     )
     if "best_matched_score" in result:
         score = result["best_matched_score"]
+        panel = result.get("judge_panel", [])
+        panel_md = "\n".join(
+            f"- `{p['judge'].split('/')[-1]}` → **{p['score']}/5**" for p in panel if p.get("score") is not None
+        )
         verdict = mo.callout(
-            mo.md(f"### Rediscovery score: **{score}/5**\n{result.get('best_matched_reason','')}"),
+            mo.md(f"### Rediscovery score — independent panel median: **{score}/5**\n{panel_md}\n\n"
+                  f"{result.get('best_matched_reason','')}"),
             kind="success" if score >= 3 else "warn",
         )
     else:
         verdict = mo.md("*(no ground-truth hypothesis for this entry)*")
-    mo.vstack([header, insp, best, verdict])
+    refs = (result.get("grounding") or {}).get("references", [])
+    if refs:
+        refs_md = "\n".join(f"- {(r.get('title') or '')[:90]} ({r.get('doi','')})" for r in refs)
+        grounding = mo.md(f"### Literature grounding (Crossref)\n{refs_md}")
+    else:
+        grounding = mo.md("")
+    mo.vstack([header, insp, best, verdict, grounding])
     return
 
 
