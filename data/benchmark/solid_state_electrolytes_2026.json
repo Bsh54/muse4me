@@ -1,0 +1,32 @@
+[
+  {
+    "id": "sse-example-1",
+    "domain": "solid-state electrolytes",
+    "status": "example",
+    "_note": "ILLUSTRATIVE demo entry, not a real paper. Replace with a real post-cutoff breakthrough (with source.url) before reporting results.",
+    "source": null,
+    "research_question": "How can the room-temperature lithium-ion conductivity of sulfide solid electrolytes be substantially increased without sacrificing stability against lithium metal anodes?",
+    "background_survey": "Sulfide solid electrolytes are attractive for all-solid-state batteries because of their soft, deformable grains and relatively high ionic conductivity. However, further gains are hard to obtain: conductivity is limited by narrow migration bottlenecks in the crystalline framework, and most high-conductivity sulfides react with lithium metal to form resistive interphases that grow over cycling. Prior work has tuned composition and densification, but a general design principle linking the structural disorder of the anion framework to macroscopic ion transport, together with a route to a self-limiting interface, has remained unclear.",
+    "ground_truth_hypothesis": "Deliberately introducing partial occupational disorder into the anion sublattice broadens and interconnects the lithium migration channels, flattening the energy landscape so that conduction becomes nearly isotropic and markedly faster at room temperature; combining this with light aliovalent doping to raise carrier concentration and an additive that forms a thin, electronically insulating, self-limiting interphase yields both high conductivity and stability against lithium metal.",
+    "keypoints": "(1) occupational disorder in the anion sublattice broadens/interconnects Li migration channels; (2) a flatter, more isotropic energy landscape raises room-temperature conductivity; (3) aliovalent doping increases carrier concentration; (4) a self-limiting, electronically insulating interphase stabilizes the Li-metal contact.",
+    "ground_truth_inspirations": [
+      "the physics of disorder and percolation in glasses",
+      "self-limiting passivation layers in corrosion science"
+    ]
+  },
+  {
+    "id": "sse-example-2",
+    "domain": "solid-state electrolytes",
+    "status": "example",
+    "_note": "ILLUSTRATIVE demo entry, not a real paper. Replace with a real post-cutoff breakthrough (with source.url) before reporting results.",
+    "source": null,
+    "research_question": "How can halide solid electrolytes be made far more tolerant to humid air while keeping high ionic conductivity, so that they can be processed outside a dry room?",
+    "background_survey": "Halide solid electrolytes offer wide electrochemical windows and good compatibility with oxide cathodes, but many degrade rapidly when exposed to moisture, hydrolysing and losing conductivity. Current mitigation relies on strict dry-room processing, which raises cost. Attempts to add protective coatings often block ion transport. A design that intrinsically resists water uptake while preserving fast conduction has been missing.",
+    "ground_truth_hypothesis": "Partially substituting the metal site with a more water-resistant cation drives the surface to reconstruct into a thin, intrinsically hydrophobic terminating layer that repels water molecules while leaving the bulk conduction pathways intact, giving halide electrolytes strong humidity tolerance without a conductivity-blocking coating.",
+    "keypoints": "(1) partial cation substitution; (2) surface reconstruction into a thin hydrophobic terminating layer; (3) water repelled at the surface rather than blocked by a thick coating; (4) bulk conduction pathways preserved, so conductivity is retained.",
+    "ground_truth_inspirations": [
+      "hydrophobic surface microstructures in biology (lotus effect)",
+      "surface segregation phenomena in alloy metallurgy"
+    ]
+  }
+]

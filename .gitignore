@@ -1,0 +1,21 @@
+# secrets
+config.json
+*.key
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# outputs
+outputs/
+checkpoints/
+*.log
+
+# os / editors
+.DS_Store
+.idea/
+.vscode/
