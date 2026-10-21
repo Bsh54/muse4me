@@ -69,22 +69,29 @@ def evolve(client, cfg, rq, bg, inspirations, log=print):
     best_per_insp = []
     for idx, insp in enumerate(inspirations):
         log(f"  [evolve] inspiration {idx + 1}/{len(inspirations)}: {insp['title'][:60]}")
-        line_hyps = []
-        hyp = generate_initial(client, cfg, rq, bg, insp)
-        hyp = self_refine(client, cfg, rq, bg, insp, hyp)
-        line_hyps.append(hyp)
-        candidates.append({"text": hyp, "inspiration": insp["title"], "origin": "refined"})
-        for _ in range(max(0, cfg.num_mutations - 1)):
-            mut = mutate(client, cfg, rq, bg, insp, line_hyps)
-            mut = self_refine(client, cfg, rq, bg, insp, mut)
-            line_hyps.append(mut)
-            candidates.append({"text": mut, "inspiration": insp["title"], "origin": "mutation"})
-        best_per_insp.append(line_hyps[0])
+        try:
+            line_hyps = []
+            hyp = generate_initial(client, cfg, rq, bg, insp)
+            hyp = self_refine(client, cfg, rq, bg, insp, hyp)
+            line_hyps.append(hyp)
+            candidates.append({"text": hyp, "inspiration": insp["title"], "origin": "refined"})
+            for _ in range(max(0, cfg.num_mutations - 1)):
+                mut = mutate(client, cfg, rq, bg, insp, line_hyps)
+                mut = self_refine(client, cfg, rq, bg, insp, mut)
+                line_hyps.append(mut)
+                candidates.append({"text": mut, "inspiration": insp["title"], "origin": "mutation"})
+            best_per_insp.append(line_hyps[0])
+        except Exception as e:  # noqa: BLE001 - one bad inspiration must not kill the whole run
+            log(f"  [evolve] inspiration {idx + 1} failed, skipping: {e}")
+            continue
 
     # cross-inspiration recombination of the two leading lines
     if len(best_per_insp) >= 2:
-        log("  [evolve] recombining across inspirations")
-        combo = recombine(client, cfg, rq, bg, best_per_insp[0], best_per_insp[1])
-        candidates.append({"text": combo, "inspiration": "recombination", "origin": "recombination"})
+        try:
+            log("  [evolve] recombining across inspirations")
+            combo = recombine(client, cfg, rq, bg, best_per_insp[0], best_per_insp[1])
+            candidates.append({"text": combo, "inspiration": "recombination", "origin": "recombination"})
+        except Exception as e:  # noqa: BLE001
+            log(f"  [evolve] recombination failed, skipping: {e}")
 
     return candidates

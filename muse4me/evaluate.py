@@ -20,7 +20,10 @@ def self_evaluate(client, cfg, hypothesis):
 def score_candidates(client, cfg, candidates):
     """Attach self-eval scores to each candidate and return them ranked (desc)."""
     for c in candidates:
-        scores, avg = self_evaluate(client, cfg, c["text"])
+        try:
+            scores, avg = self_evaluate(client, cfg, c["text"])
+        except Exception:  # noqa: BLE001 - a failed self-eval defaults to neutral, never aborts ranking
+            scores, avg = [3, 3, 3, 3], 3.0
         c["scores"] = scores
         c["avg_score"] = avg
     return sorted(candidates, key=lambda c: c["avg_score"], reverse=True)

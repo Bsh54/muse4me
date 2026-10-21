@@ -76,7 +76,12 @@ def run_benchmark(cfg: Config, benchmark: list, corpus: list, limit=None, log=pr
     results, matched = [], []
     for i, entry in enumerate(entries):
         log(f"\n=== entry {i + 1}/{len(entries)} : {entry.get('id')} ===")
-        res = run_entry(cfg, entry, corpus, clients=clients, log=log)
+        try:
+            res = run_entry(cfg, entry, corpus, clients=clients, log=log)
+        except Exception as e:  # noqa: BLE001 - a failed entry is recorded, the benchmark continues
+            log(f"[entry {entry.get('id')}] failed: {e}")
+            results.append({"id": entry.get("id"), "error": str(e)})
+            continue
         results.append(res)
         if "best_matched_score" in res:
             matched.append(res["best_matched_score"])

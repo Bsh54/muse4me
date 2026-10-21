@@ -26,8 +26,8 @@ class LLMClient:
         else:
             raise ValueError(f"Unknown provider: {provider}")
 
-    def generate(self, prompt: str, temperature: float = 1.0, max_retries: int = 6) -> str:
-        """Return the model's text completion for a single user prompt."""
+    def generate(self, prompt: str, temperature: float = 1.0, max_retries: int = 8) -> str:
+        """Return the model's text completion for a single user prompt (resilient to transient errors)."""
         last_err = None
         for attempt in range(max_retries):
             try:
@@ -45,7 +45,7 @@ class LLMClient:
                     return resp.text or ""
             except Exception as e:  # noqa: BLE001 - retry on any transient API error
                 last_err = e
-                time.sleep(min(2 ** attempt, 30))
+                time.sleep(min(3 * (2 ** attempt), 60))
         raise RuntimeError(f"LLM generation failed after {max_retries} retries: {last_err}")
 
 
