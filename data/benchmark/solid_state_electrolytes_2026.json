@@ -1,12 +1,52 @@
 [
   {
+    "id": "sse-0001",
+    "domain": "solid-state electrolytes",
+    "status": "real",
+    "source": {
+      "title": "Beyond the Paddle-Wheel Mechanism: Hop Function Analysis of Ion Transport in Organic Ionic Plastic Crystals",
+      "venue": "Journal of the American Chemical Society",
+      "year": 2026,
+      "pub_date": "2026-06-01",
+      "url": "https://doi.org/10.1021/jacs.6c04713"
+    },
+    "research_question": "In organic ionic plastic crystals (OIPCs) used as solid electrolytes, what microscopic mechanism actually governs fast lithium-ion transport, and what structural event enables the fastest ion jumps?",
+    "background_survey": "Organic ionic plastic crystals are soft, non-volatile solid electrolytes attractive for safe batteries. For years the dominant explanation for their ion transport has been the 'paddle-wheel' picture, in which the rotational motion of the molecular anions is thought to drag or assist the motion of lithium ions. However, quantitative, molecular-level evidence linking a specific structural event to individual ion jumps has been lacking, so the true rate-limiting step of conduction has remained unresolved.",
+    "ground_truth_hypothesis": "Lithium-ion motion in OIPCs is not driven directly by anion rotation; it occurs through cooperative rearrangement of the anion cage surrounding each lithium ion. When the number of coordinating anions transiently decreases and the cage momentarily 'opens', the lithium ion's mobility rises by up to several orders of magnitude. The conduction rate is therefore set by these cage-opening events, not by paddle-wheel rotation.",
+    "keypoints": "(1) transport is NOT directly driven by anion rotation (it goes beyond the paddle-wheel picture); (2) lithium moves via cooperative rearrangement of the surrounding anion cage; (3) a transient decrease in lithium coordination number ('cage opening') enables the fast jump; (4) these cage-opening events, not rotation, set the conduction rate.",
+    "ground_truth_inspirations": [
+      "molecular cage dynamics and coordination chemistry",
+      "hop-rate / transition-state analysis in diffusion physics"
+    ]
+  },
+  {
+    "id": "sse-0002",
+    "domain": "solid-state electrolytes",
+    "status": "real",
+    "source": {
+      "title": "Surface-Functionalized LLZO-Incorporated Multilayer Composite Solid Electrolytes for Dendrite Suppression and Efficient Ionic Conduction in Lithium-Metal Batteries",
+      "venue": "Advanced Materials",
+      "year": 2026,
+      "pub_date": "2026-08-03",
+      "url": "https://doi.org/10.1002/adma.73879"
+    },
+    "research_question": "How can a composite solid electrolyte for lithium-metal batteries simultaneously achieve high ionic conductivity, strong mechanical integrity, and effective suppression of lithium dendrites?",
+    "background_survey": "Composite solid electrolytes blend inorganic ceramic fillers with flexible polymers to combine the conductivity of ceramics with the processability of polymers. In practice, poor adhesion and weak interfaces between the ceramic and polymer phases limit both mechanical strength and ion transport, and lithium dendrites still nucleate and grow through the electrolyte during cycling. A design that strengthens the ceramic-polymer interface while keeping ion transport fast and blocking dendrites has remained difficult.",
+    "ground_truth_hypothesis": "A multilayer (tri-layer) composite in which surface-functionalized, chemically active LLZO ceramic fillers are bonded to a flexible triblock copolymer using adhesive chemistry inspired by the proteins mussels use to adhere to wet rocks will strengthen the ceramic-polymer interface, raise ionic conductivity and mechanical strength together, and suppress dendrite formation in lithium-metal batteries.",
+    "keypoints": "(1) adhesive chemistry inspired by mussel adhesive proteins; (2) surface-functionalized / chemically active LLZO ceramic fillers; (3) a flexible triblock copolymer matrix; (4) a multilayer (tri-layer) architecture; (5) a simultaneous gain in ionic conductivity and mechanical strength together with dendrite suppression.",
+    "ground_truth_inspirations": [
+      "mussel adhesive proteins (wet adhesion in biology)",
+      "multilayer composite / laminate mechanics"
+    ]
+  },
+  {
     "id": "sse-example-1",
     "domain": "solid-state electrolytes",
     "status": "example",
-    "_note": "ILLUSTRATIVE demo entry, not a real paper. Replace with a real post-cutoff breakthrough (with source.url) before reporting results.",
+    "_note": "ILLUSTRATIVE demo entry, not a real paper. Kept so the pipeline runs end-to-end; never report as a rediscovery result.",
     "source": null,
     "research_question": "How can the room-temperature lithium-ion conductivity of sulfide solid electrolytes be substantially increased without sacrificing stability against lithium metal anodes?",
-    "background_survey": "Sulfide solid electrolytes are attractive for all-solid-state batteries because of their soft, deformable grains and relatively high ionic conductivity. However, further gains are hard to obtain: conductivity is limited by narrow migration bottlenecks in the crystalline framework, and most high-conductivity sulfides react with lithium metal to form resistive interphases that grow over cycling. Prior work has tuned composition and densification, but a general design principle linking the structural disorder of the anion framework to macroscopic ion transport, together with a route to a self-limiting interface, has remained unclear.",
+    "background_survey": "Sulfide solid electrolytes are attractive for all-solid-state batteries because of their soft, deformable grains and relatively high ionic conductivity. However, further gains are hard to obtain: conductivity is limited by narrow migration bottlenecks in the crystalline framework, and most high-conductivity sulfides react with lithium metal to form resistive interphases that grow over cycling. A general design principle linking the structural disorder of the anion framework to macroscopic ion transport, together with a route to a self-limiting interface, has remained unclear.",
     "ground_truth_hypothesis": "Deliberately introducing partial occupational disorder into the anion sublattice broadens and interconnects the lithium migration channels, flattening the energy landscape so that conduction becomes nearly isotropic and markedly faster at room temperature; combining this with light aliovalent doping to raise carrier concentration and an additive that forms a thin, electronically insulating, self-limiting interphase yields both high conductivity and stability against lithium metal.",
     "keypoints": "(1) occupational disorder in the anion sublattice broadens/interconnects Li migration channels; (2) a flatter, more isotropic energy landscape raises room-temperature conductivity; (3) aliovalent doping increases carrier concentration; (4) a self-limiting, electronically insulating interphase stabilizes the Li-metal contact.",
     "ground_truth_inspirations": [
@@ -18,7 +58,7 @@
     "id": "sse-example-2",
     "domain": "solid-state electrolytes",
     "status": "example",
-    "_note": "ILLUSTRATIVE demo entry, not a real paper. Replace with a real post-cutoff breakthrough (with source.url) before reporting results.",
+    "_note": "ILLUSTRATIVE demo entry, not a real paper. Kept so the pipeline runs end-to-end; never report as a rediscovery result.",
     "source": null,
     "research_question": "How can halide solid electrolytes be made far more tolerant to humid air while keeping high ionic conductivity, so that they can be processed outside a dry room?",
     "background_survey": "Halide solid electrolytes offer wide electrochemical windows and good compatibility with oxide cathodes, but many degrade rapidly when exposed to moisture, hydrolysing and losing conductivity. Current mitigation relies on strict dry-room processing, which raises cost. Attempts to add protective coatings often block ion transport. A design that intrinsically resists water uptake while preserving fast conduction has been missing.",
