@@ -10,11 +10,11 @@ The core bet: great hypotheses come from **distant** inspiration (ideas borrowed
 
 ## Why this is different
 
-Most "AI scientist" systems either (a) generate hypotheses that sound novel but collapse under scrutiny, or (b) grade themselves with an LLM judge, proving nothing. muse4me is built around three ideas instead:
+muse4me is **a protocol for measuring genuine rediscovery, not just another hypothesis generator.** Most "AI scientist" systems either (a) generate hypotheses that sound novel but collapse under scrutiny, or (b) grade themselves with an LLM judge from the same family, proving nothing. muse4me is built around three controls instead:
 
-1. **Post-cutoff benchmark.** We evaluate only on breakthroughs published *after* the model's training cutoff, so a match is a genuine rediscovery, not recall. Ground truth is the real published paper.
-2. **Distant-inspiration engine.** Hypotheses evolve from inspirations deliberately chosen for *potential*, not semantic similarity. A single switch lets us run an ablation: distant vs. near vs. none.
-3. **Grounded evaluation.** A rediscovery score compares each generated hypothesis to the real published hypothesis against annotated key points, with optional literature grounding.
+1. **Leakage control (post-cutoff).** Before scoring, every benchmark item is probed: the model is asked to recall the result from its training knowledge alone. If it already knows it, the item is flagged as *leaked* and excluded — so a match is a genuine rediscovery, not recall. This is not hypothetical: on our own benchmark the filter already caught a June-2026 paper the model had memorised and excluded it.
+2. **Distant-inspiration engine.** Hypotheses evolve from inspirations deliberately chosen for *potential*, not semantic similarity. A single switch runs the ablation: distant vs. near vs. none.
+3. **Independent, grounded verification.** The rediscovery score is produced by a judge from a *different model family* than the generator (deepseek generates, gemini judges), against annotated key points, with optional literature grounding — directly attacking the verification gap that sinks most AI-for-science demos.
 
 ## Method (three stages)
 

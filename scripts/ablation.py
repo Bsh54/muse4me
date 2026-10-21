@@ -26,8 +26,11 @@ def main():
 
     cfg = Config.load(args.config)
     benchmark = load_json(args.benchmark)
+    # headline ablation runs on real, non-leaked entries only
+    benchmark = [e for e in benchmark if e.get("status") == "real" and not e.get("leaked")]
     corpus = load_json(args.corpus)
     os.makedirs(args.out_dir, exist_ok=True)
+    print(f"ablation over {len(benchmark)} clean real entries: {[e['id'] for e in benchmark]}")
 
     modes = ["far", "near", "none"]
     summary = {}

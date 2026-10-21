@@ -60,7 +60,9 @@ def run_entry(cfg: Config, entry: dict, corpus: list, clients=None, log=print):
 def run_benchmark(cfg: Config, benchmark: list, corpus: list, limit=None, log=print):
     """Run over a benchmark and aggregate rediscovery metrics."""
     clients = _clients(cfg)
-    entries = benchmark if limit is None else benchmark[:limit]
+    # leaked entries are excluded from rediscovery scoring (the model already knows them)
+    usable = [e for e in benchmark if not e.get("leaked")]
+    entries = usable if limit is None else usable[:limit]
     results, matched = [], []
     for i, entry in enumerate(entries):
         log(f"\n=== entry {i + 1}/{len(entries)} : {entry.get('id')} ===")

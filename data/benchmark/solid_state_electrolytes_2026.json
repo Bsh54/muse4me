@@ -3,6 +3,8 @@
     "id": "sse-0001",
     "domain": "solid-state electrolytes",
     "status": "real",
+    "leaked": true,
+    "_leak_note": "Excluded conservatively. A same-family judge scored the model's recall of this June-2026 result at 3/5 (looks leaked), while an independent judge scored the same recall 0/5 (looks clean) - a judge-dependent disagreement that is itself evidence for independent verification. As this is the item closest to the training cutoff, we exclude it from headline rediscovery scoring and report on the unambiguous August-2026 items instead.",
     "source": {
       "title": "Beyond the Paddle-Wheel Mechanism: Hop Function Analysis of Ion Transport in Organic Ionic Plastic Crystals",
       "venue": "Journal of the American Chemical Society",
@@ -37,6 +39,26 @@
     "ground_truth_inspirations": [
       "mussel adhesive proteins (wet adhesion in biology)",
       "multilayer composite / laminate mechanics"
+    ]
+  },
+  {
+    "id": "sse-0003",
+    "domain": "solid-state electrolytes",
+    "status": "real",
+    "source": {
+      "title": "Migration-Coupled Local Fluoride Relaxation in Li2-xLa(1+x)/3Nb2O6F Single Crystals",
+      "venue": "Journal of the American Chemical Society",
+      "year": 2026,
+      "pub_date": "2026-08-21",
+      "url": "https://doi.org/10.1021/jacs.6c08912"
+    },
+    "research_question": "Oxide-based solid electrolytes are prized for safety and stability but usually conduct lithium far more slowly than sulfides. How can an oxide-related solid electrolyte reach lithium-ion conductivity rivaling sulfides (well above 10 mS/cm), and what atomic-scale mechanism would explain such fast conduction in a framework whose anions are not highly polarizable?",
+    "background_survey": "A long-standing explanation for why sulfide and chloride electrolytes conduct lithium so well is that their large, highly polarizable anions deform easily and smooth the migrating ion's path. Oxide frameworks, whose anions are harder and far less polarizable, were therefore expected to conduct more slowly, and the mechanism by which any oxide-related material could approach sulfide-level lithium conductivity was unknown.",
+    "ground_truth_hypothesis": "In the oxyfluoride LLNOF, fast lithium conduction does not rely on anion polarizability; it is enabled by a migration-coupled local relaxation of the framework. Each time a lithium ion hops into a neighbouring vacant site, the nearby fluoride ion transiently migrates in the opposite direction, effectively 'getting out of the way' and lowering the migration energy barrier. Increasing the vacancy content by tuning the lithium/lanthanum ratio amplifies this effect, giving record oxide-related conductivity (~16 mS/cm).",
+    "keypoints": "(1) the mechanism does NOT depend on anion polarizability (it challenges the assumption that sulfides are intrinsically better conductors); (2) a dynamic, cooperative relaxation of the framework coupled to each Li hop; (3) the fluoride ion displaces in the opposite direction to open the path and lower the barrier; (4) raising the vacancy content by tuning composition increases conductivity to a record for oxide-related electrolytes.",
+    "ground_truth_inspirations": [
+      "cooperative 'getting out of the way' / doorway gating in diffusion",
+      "correlated counter-motion (concerted / knock-on transport)"
     ]
   },
   {
