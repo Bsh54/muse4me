@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from muse4me.config import Config
 from muse4me.llm import LLMClient
+from muse4me.evaluate import build_judges
 from muse4me.leakage import leakage_check
 from muse4me.pipeline import load_json
 
@@ -28,7 +29,7 @@ def main():
 
     cfg = Config.load(args.config)
     gen = LLMClient(cfg.provider, cfg.api_key, cfg.base_url, cfg.model_generate)
-    judge = LLMClient(cfg.provider, cfg.api_key, cfg.base_url, cfg.model_evaluate)
+    judges = build_judges(cfg)
 
     benchmark = load_json(args.benchmark)
     if args.only_real:
@@ -36,7 +37,7 @@ def main():
 
     reports = []
     for e in benchmark:
-        r = leakage_check(gen, judge, cfg, e)
+        r = leakage_check(gen, judges, cfg, e)
         reports.append(r)
         flag = "LEAKED" if r["leaked"] else ("knows?" if r["knows_claim"] else "clean")
         print(f"[{flag}] {r['id']}: recall_match={r['recall_matched']}/5")
@@ -47,7 +48,7 @@ def main():
 
     n_leaked = sum(1 for r in reports if r["leaked"])
     print(f"\n{n_leaked}/{len(reports)} entries flagged as leaked. "
-          f"Generation model = {cfg.model_generate}; judge = {cfg.model_evaluate}")
+          f"Generation model = {cfg.model_generate}; judge panel = {cfg.model_judges or [cfg.model_evaluate]}")
     print(f"Saved to {args.out}")
 
 

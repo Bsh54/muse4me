@@ -13,6 +13,7 @@ class Config:
     model_retrieve: str = "gpt-4o"
     model_generate: str = "gpt-4o"
     model_evaluate: str = "gpt-4o"
+    model_judges: list = field(default_factory=list)   # independent panel for rediscovery/leakage scoring
     domain: str = "solid-state electrolytes"
     temperature: float = 1.0
     num_mutations: int = 3

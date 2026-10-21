@@ -9,7 +9,7 @@ model's training data -> the entry is leaked and must be dropped or flagged.
 """
 
 from .llm import extract_field
-from .evaluate import matched_score
+from .evaluate import panel_matched_score
 
 LEAK_THRESHOLD = 3  # recall match >= this means the model already knows the answer
 
@@ -37,20 +37,22 @@ def recall(gen_client, cfg, entry):
     return extract_field(raw, "Recall")
 
 
-def leakage_check(gen_client, judge_client, cfg, entry):
-    """Return a leakage report for one entry (judged by an independent model)."""
+def leakage_check(gen_client, judges, cfg, entry):
+    """Return a leakage report for one entry, judged by an independent panel."""
     recalled = recall(gen_client, cfg, entry)
     knows_claim = "NO KNOWN RESULT" not in recalled.upper()
     if knows_claim:
-        score, reason = matched_score(judge_client, cfg, recalled,
-                                      entry["ground_truth_hypothesis"], entry.get("keypoints", ""))
+        score, per = panel_matched_score(judges, cfg, recalled,
+                                         entry["ground_truth_hypothesis"], entry.get("keypoints", ""))
+        reason = "; ".join(f"{p['judge'].split('/')[-1]}:{p['score']}" for p in per)
     else:
-        score, reason = 0, "model reports no known result"
+        score, per, reason = 0, [], "model reports no known result"
     return {
         "id": entry.get("id"),
         "knows_claim": knows_claim,
         "recall_matched": score,
         "leaked": score >= LEAK_THRESHOLD,
         "recalled": recalled,
+        "judge_panel": per,
         "reason": reason,
     }

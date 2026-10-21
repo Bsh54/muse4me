@@ -5,6 +5,7 @@
   "model_retrieve": "gpt-4o",
   "model_generate": "gpt-4o",
   "model_evaluate": "gpt-4o",
+  "model_judges": ["google/gemini-2.5-flash-lite", "openai/gpt-6-luna", "qwen/qwen3.7-flash"],
   "domain": "solid-state electrolytes",
   "temperature": 1.0,
   "num_mutations": 3,

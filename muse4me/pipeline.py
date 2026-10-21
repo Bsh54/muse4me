@@ -10,7 +10,8 @@ from .config import Config
 from .llm import LLMClient
 from .retrieve import retrieve_inspirations
 from .evolve import evolve
-from .evaluate import score_candidates, matched_score
+from .evaluate import score_candidates, build_judges, panel_matched_score
+from .grounding import ground_hypothesis
 
 
 def _clients(cfg: Config):
@@ -50,10 +51,19 @@ def run_entry(cfg: Config, entry: dict, corpus: list, clients=None, log=print):
     if gt:
         keypoints = entry.get("keypoints", "")
         best = ranked[0]
-        ms, reason = matched_score(c_eval, cfg, best["text"], gt, keypoints)
-        result["best_matched_score"] = ms
-        result["best_matched_reason"] = reason
-        log(f"[evaluate] best matched score = {ms}/5")
+        judges = build_judges(cfg)
+        agg, per = panel_matched_score(judges, cfg, best["text"], gt, keypoints)
+        result["best_matched_score"] = agg
+        result["judge_panel"] = per
+        result["best_matched_reason"] = next(
+            (p["reason"] for p in per if p["score"] == agg), per[0]["reason"] if per else "")
+        log(f"[evaluate] panel matched score = {agg}/5  judges={[p['score'] for p in per]}")
+
+    # literature grounding of the top hypothesis (best-effort, never fatal)
+    try:
+        result["grounding"] = ground_hypothesis(ranked[0]["text"])
+    except Exception:  # noqa: BLE001
+        result["grounding"] = {"grounded": False, "references": []}
     return result
 
 
